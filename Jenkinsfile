@@ -18,7 +18,11 @@ pipeline {
 
     post {
       failure {
-        script.httpRequest(url: 'http://${key}/api/v1.0/CiCD/jenkins-failed-build', acceptType: 'TEXT_PLAIN', consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'POST', responseHandle: 'STRING')
+        steps{
+          script {
+            script.httpRequest(url: 'http://${key}/api/v1.0/CiCD/jenkins-failed-build', acceptType: 'TEXT_PLAIN', consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'POST', responseHandle: 'STRING')
+          }
+        }        
       }
     }
   
