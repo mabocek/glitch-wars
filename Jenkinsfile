@@ -3,12 +3,14 @@ pipeline {
   stages {
     stage('SonarQube Analysis') {
       steps {
-        def scannerHome = tool 'SonarScanner for MSBuild'
-            withSonarQubeEnv() {
-              sh "dotnet ${scannerHome}/SonarScanner.MSBuild.dll begin /k:\"mabocek_glitch-wars_AYyTjGI2uQ4UhGOB8co_\""
-              sh "dotnet build"
-              sh "dotnet ${scannerHome}/SonarScanner.MSBuild.dll end"
-            }
+        step ('SonarScanner for MSBuild') {
+          def scannerHome = tool 'SonarScanner for MSBuild'
+              withSonarQubeEnv() {
+                sh "dotnet ${scannerHome}/SonarScanner.MSBuild.dll begin /k:\"mabocek_glitch-wars_AYyTjGI2uQ4UhGOB8co_\""
+                sh "dotnet build"
+                sh "dotnet ${scannerHome}/SonarScanner.MSBuild.dll end"
+              }
+        }
       }
     }
     stage('Build') {
