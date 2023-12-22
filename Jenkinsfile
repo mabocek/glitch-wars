@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('SonarQube Analysis') 
+    stage('SonarQube Analysis') {
       steps {
         def scannerHome = tool 'SonarScanner for MSBuild'
             withSonarQubeEnv() {
@@ -10,7 +10,6 @@ pipeline {
               sh "dotnet ${scannerHome}/SonarScanner.MSBuild.dll end"
             }
       }
-      
     }
     stage('Build') {
       steps {
