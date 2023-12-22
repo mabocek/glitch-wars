@@ -1,13 +1,16 @@
 pipeline {
   agent any
   stages {
-    stage('SonarQube Analysis') {
-      def scannerHome = tool 'SonarScanner for MSBuild'
-      withSonarQubeEnv() {
-        bat "dotnet ${scannerHome}\\SonarScanner.MSBuild.dll begin /k:\"mabocek_glitch-wars_AYyTjGI2uQ4UhGOB8co_\""
-        bat "dotnet build"
-        bat "dotnet ${scannerHome}\\SonarScanner.MSBuild.dll end"
+    stage('SonarQube Analysis') 
+      steps {
+        def scannerHome = tool 'SonarScanner for MSBuild'
+            withSonarQubeEnv() {
+              sh "dotnet ${scannerHome}/SonarScanner.MSBuild.dll begin /k:\"mabocek_glitch-wars_AYyTjGI2uQ4UhGOB8co_\""
+              sh "dotnet build"
+              sh "dotnet ${scannerHome}/SonarScanner.MSBuild.dll end"
+            }
       }
+      
     }
     stage('Build') {
       steps {
