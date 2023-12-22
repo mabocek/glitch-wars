@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('SonarQube Analysis') {
       steps {
-        step {
+        script {
           def scannerHome = tool 'SonarScanner for MSBuild'
               withSonarQubeEnv() {
                 sh "dotnet ${scannerHome}/SonarScanner.MSBuild.dll begin /k:\"mabocek_glitch-wars_AYyTjGI2uQ4UhGOB8co_\""
