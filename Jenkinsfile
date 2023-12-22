@@ -1,6 +1,9 @@
 pipeline {
   agent any
   stages {
+    stage('SCM') {
+      checkout scm
+    }
     stage('SonarQube Analysis') {
       steps {
         script {
