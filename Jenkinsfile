@@ -8,7 +8,7 @@ pipeline {
     }
     stage('SonarQube Analysis') {
       steps {
-        withDotNet(sdk: '8.0') {
+        withDotNet(sdk: 'dotnet8') {
           script {
             def scannerHome = tool 'SonarScanner for MSBuild'
                 withSonarQubeEnv() {
@@ -22,7 +22,7 @@ pipeline {
     }
     stage('Build') {
       steps {
-        withDotNet(sdk: '8.0') {
+        withDotNet(sdk: 'dotnet8') {
           dotnetNuGetLocals()
           dotnetClean()
           dotnetToolRestore()
